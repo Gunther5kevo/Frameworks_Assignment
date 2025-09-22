@@ -2,7 +2,8 @@ import pandas as pd
 
 # Load dataset
 df = pd.read_csv("data/metadata.csv", low_memory=False)
-
+sample = df.sample(10000, random_state=42)
+sample.to_csv("data/metadata_sample.csv", index=False)
 # === Step 1: Handle Missing Data ===
 print("\n❌ Missing values before cleaning:")
 print(df.isnull().sum().sort_values(ascending=False).head(10))

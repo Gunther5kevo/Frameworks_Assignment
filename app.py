@@ -4,7 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load cleaned metadata
-df = pd.read_csv("data/metadata_cleaned.csv", low_memory=False)
+df = pd.read_csv("data/metadata_sample.csv", low_memory=False)
+
 
 # Rename for consistency
 if "year" in df.columns:

@@ -18,7 +18,8 @@ venv/
 *.log
 
 # Data files (keep only small samples, not full dataset)
-data/*.csv
+data/*metadata_cleaned.csv
+data/*metadata.csv
 !data/metadata_cleaned.csv   # keep cleaned version if you want it tracked
 
 # OS files
