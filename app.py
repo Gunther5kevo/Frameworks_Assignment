@@ -6,9 +6,10 @@ import matplotlib.pyplot as plt
 # Load cleaned metadata
 df = pd.read_csv("data/metadata_sample.csv", low_memory=False)
 
-
-# Rename for consistency
-if "year" in df.columns:
+# Ensure publish_year exists
+if "publish_time" in df.columns:
+    df["publish_year"] = pd.to_datetime(df["publish_time"], errors="coerce").dt.year
+elif "year" in df.columns:
     df = df.rename(columns={"year": "publish_year"})
 
 # Streamlit App
@@ -52,19 +53,22 @@ ax.set_title("Top Journals")
 st.pyplot(fig)
 
 # --- Visualization 3: Abstract Word Count Distribution ---
-st.subheader("Abstract Word Count Distribution")
-fig, ax = plt.subplots()
-filtered_df["abstract_word_count"].dropna().hist(bins=30, ax=ax)
-ax.set_xlabel("Word Count")
-ax.set_ylabel("Frequency")
-ax.set_title("Distribution of Abstract Length")
-st.pyplot(fig)
+if "abstract" in filtered_df.columns:
+    filtered_df["abstract_word_count"] = filtered_df["abstract"].fillna("").apply(lambda x: len(x.split()))
+    st.subheader("Abstract Word Count Distribution")
+    fig, ax = plt.subplots()
+    filtered_df["abstract_word_count"].dropna().hist(bins=30, ax=ax)
+    ax.set_xlabel("Word Count")
+    ax.set_ylabel("Frequency")
+    ax.set_title("Distribution of Abstract Length")
+    st.pyplot(fig)
 
 # --- Visualization 4: Source Breakdown ---
-st.subheader("Source Breakdown")
-fig, ax = plt.subplots()
-filtered_df["source_x"].value_counts().head(10).plot(kind="bar", ax=ax)
-ax.set_xlabel("Source")
-ax.set_ylabel("Number of Papers")
-ax.set_title("Top Sources")
-st.pyplot(fig)
+if "source_x" in filtered_df.columns:
+    st.subheader("Source Breakdown")
+    fig, ax = plt.subplots()
+    filtered_df["source_x"].value_counts().head(10).plot(kind="bar", ax=ax)
+    ax.set_xlabel("Source")
+    ax.set_ylabel("Number of Papers")
+    ax.set_title("Top Sources")
+    st.pyplot(fig)
