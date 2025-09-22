@@ -113,6 +113,7 @@ Built a user-friendly web application featuring:
    ```
 
 The dashboard will be available at `http://localhost:8501`
+also deployed at https://gunther5kevo-frameworks-assignment-app-stjn2l.streamlit.app/
 
 ## Key Dependencies
 
