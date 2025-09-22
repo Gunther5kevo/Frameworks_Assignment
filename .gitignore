@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Streamlit cache
+.streamlit/
+
+# Logs
+*.log
+
+# Data files (keep only small samples, not full dataset)
+data/*.csv
+!data/metadata_cleaned.csv   # keep cleaned version if you want it tracked
+
+# OS files
+.DS_Store
+Thumbs.db
